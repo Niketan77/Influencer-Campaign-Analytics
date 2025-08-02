@@ -6,10 +6,23 @@ from utils.visualizations import create_dynamic_filters
 
 def show_campaign_performance():
     st.title("📈 Campaign Performance")
+    st.markdown("### Deep-dive into campaign metrics and ROI analysis")
     dm: DataManager = st.session_state.data_manager
     if not st.session_state.get('data_loaded', False):
-        st.info("Load data on Data Management page first.")
+        st.warning("⚠️ **No Data Loaded**")
+        st.info("👆 Navigate to **Data Management** page first to load your data or demo data")
+        st.markdown("---")
+        st.markdown("""
+        **This page provides:**
+        - 🎯 Campaign filtering by date, brand, platform
+        - 📊 Performance metrics (orders, revenue, ROAS)
+        - 🔍 Influencer performance scatter plots
+        - 📅 Timeline analysis of orders and revenue
+        - 🏆 Platform comparison insights
+        """)
         return
+
+    st.info("💡 **Tip:** Use the filters below to analyze specific campaigns, date ranges, or platforms")
 
     # Get merged tracking data
     _, tracking_with_influencers = dm.get_merged_data()

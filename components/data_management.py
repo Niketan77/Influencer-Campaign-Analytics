@@ -5,14 +5,47 @@ from data_processing.sample_data_generator import generate_sample_data
 
 def show_data_management():
     st.title("📁 Data Management")
-    st.markdown("Upload or load demo CSV files for influencers, posts, tracking data, and payouts.")
+    st.markdown("### Upload your data or explore with sample datasets")
+    
+    # Instructions section
+    st.info("""
+    **📋 Getting Started Instructions:**
+    1. **New Users**: Click 'Load Demo Data' to explore the dashboard with sample data
+    2. **Upload Data**: Use the file uploader to import your CSV files
+    3. **Required Files**: influencers.csv, posts.csv, tracking.csv, payouts.csv
+    """)
+    
+    # Expected data format guide
+    with st.expander("📊 **Expected CSV Format Guide**", expanded=False):
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("""
+            **influencers.csv should contain:**
+            - id, name, category, platform, follower_count
+            
+            **posts.csv should contain:**  
+            - id, influencer_id, campaign, likes, comments, reach
+            """)
+        with col2:
+            st.markdown("""
+            **tracking.csv should contain:**
+            - influencer_id, campaign, date, orders, revenue, brand, platform
+            
+            **payouts.csv should contain:**
+            - influencer_id, campaign, total_payout, payment_date, status
+            """)
 
     dm = st.session_state.data_manager
 
+    st.markdown("---")
     col1, col2 = st.columns(2)
     with col1:
-        demo = st.button("Load Demo Data")
+        st.markdown("#### 🎭 **Try Demo Data**")
+        st.markdown("Perfect for exploring features without uploading files")
+        demo = st.button("🚀 Load Demo Data", type="primary", key="demo_data_btn")
     with col2:
+        st.markdown("#### 📤 **Upload Your Data**") 
+        st.markdown("Import your own CSV files for analysis")
         uploaded_files = st.file_uploader(
             "Upload CSV files", type=["csv"], accept_multiple_files=True
         )

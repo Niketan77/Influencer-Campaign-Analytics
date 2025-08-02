@@ -4,10 +4,30 @@ from utils.calculations import calculate_roas, calculate_incremental_roas
 
 def show_roas_calculator():
     st.title("💰 ROAS Calculator")
+    st.markdown("### Return on Ad Spend analysis and profitability insights")
     dm = st.session_state.data_manager
     if not st.session_state.get('data_loaded', False):
-        st.info("Load data on Data Management page first.")
+        st.warning("⚠️ **No Data Loaded**")
+        st.info("👆 Navigate to **Data Management** page first to load your data or demo data")
+        st.markdown("---")
+        st.markdown("""
+        **ROAS Calculator provides:**
+        - 💵 Overall portfolio ROAS
+        - 📊 Campaign-level ROAS breakdown
+        - 📈 Incremental ROAS calculations  
+        - ⚖️ Break-even analysis per campaign
+        - 🎯 ROI optimization insights
+        """)
         return
+
+    # Help section
+    with st.expander("ℹ️ **Understanding ROAS Metrics**"):
+        st.markdown("""
+        - **ROAS**: Return on Ad Spend = Revenue ÷ Cost
+        - **Good ROAS**: Typically 4:1 or higher (400% return)
+        - **Incremental ROAS**: Additional return from specific campaigns
+        - **Break-even**: Point where revenue equals cost (1:1 ratio)
+        """)
 
     # Overall ROAS
     total_revenue = dm.tracking_df['revenue'].sum()

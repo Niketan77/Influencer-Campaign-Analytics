@@ -5,13 +5,25 @@ from data_processing.data_manager import DataManager
 
 def show_overview():
     st.title("📊 Overview Dashboard")
+    st.markdown("### High-level performance metrics and trends")
     dm: DataManager = st.session_state.data_manager
 
     # Ensure data loaded
     if not st.session_state.get('data_loaded', False):
-        st.info("Load data on Data Management page first.")
+        st.warning("⚠️ **No Data Loaded**")
+        st.info("👆 Navigate to **Data Management** page first to load your data or demo data")
+        st.markdown("---")
+        st.markdown("""
+        **This page will show:**
+        - 💰 Total revenue and campaign metrics
+        - 📈 Revenue trends over time  
+        - 🏆 Top performing influencers
+        - 💳 Payout status distribution
+        """)
         return
 
+    st.success("✅ **Data Loaded Successfully** - Displaying campaign analytics")
+    
     # Key metrics
     total_revenue = dm.tracking_df['revenue'].sum()
     total_cost = dm.payouts_df['total_payout'].sum()
