@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from pages.payouts import filter_payouts_by_date
+from components.payouts import filter_payouts_by_date
 from datetime import date
 
 @pytest.fixture
